@@ -1,0 +1,32 @@
+%html
+  %head
+    %link{:rel => :stylesheet, :type => :"text/css", :href => "/css/app.css"}
+  %body
+    .count
+      %span(id="people-count") 0 
+      %span People
+    %form{ :class => "upload-form", :action => "/upload", :enctype => "multipart/form-data", :method => "post"}
+      %fieldset
+        %label{:for => "file"} Import a file
+        %input{:type => "file", :name => "csv", :placeholder => "my-file.csv", :class => "text"}
+        %input{:type => "button", :value => "Browse", :id => "browse", :class => "button"}
+
+    %table(data-sortable id="people" cellspacing="0")
+      %thead.header
+        %tr
+          %th
+            Last name
+          %th
+            First name
+          %th
+            Middle Initial
+          %th
+            Pet
+          %th
+            Birthday
+          %th
+            Favorite color
+      %tbody(class="table-body")
+  %script(src="/js/sortable.min.js")
+  %script(src="/js/jquery-3.2.1.min.js")
+  %script(src="/js/app.js")
