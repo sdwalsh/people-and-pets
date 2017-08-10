@@ -6,3 +6,153 @@ $neat-grid: (
   columns: 12,
   gutter: 20px,
 );
+
+@mixin td-image($image) {
+  vertical-align: middle;
+  content: url($image);
+  max-height: 30px;
+  padding-right: 10px;
+}
+
+body {
+  @include grid-container;
+  //@include grid-visual;
+  padding-top: 75px;
+  .count {
+    @include grid-column(3);
+    font-size: 25px;
+    color: #363945;
+  }
+  form {
+    @include grid-shift(2);
+    @include grid-column(7);    
+    fieldset {
+      border: none;
+      float: right;
+      label {
+        padding-right: 15px;
+      }
+      input.text {
+        width: 430px;
+      }
+    }
+  }
+  table {
+    @include grid-column(12);
+    th {
+      text-align: center;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      border-bottom: solid 1px $border-color;
+    }
+    td {
+      max-height: 30px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      vertical-align: middle;
+      border-bottom: solid 1px $border-color;
+    }
+    .i {
+      vertical-align: middle;
+      max-height: 30px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+}
+
+.cat {
+  @include td-image("../images/cat.png")
+}
+.dog {
+  @include td-image("../images/dog.png")
+}
+.both {
+  @include td-image("../images/both.png")
+}
+.none {
+  font-style: italic;
+  color: $default-header-color;
+}
+
+/* 
+  Sortable Table CSS Below
+  Based on minimal theme by Adam Schwartz / HubSpot edited to fit project requirements
+  uses constants defined above for colors and pixel spacing
+
+  https://github.com/HubSpot/sortable/blob/master/css/sortable-theme-minimal.css
+  
+  MIT License
+
+  Copyright (C) 2013 Adam Schwartz, http://adamschwartz.co
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+*/
+
+table[data-sortable] {
+  border-spacing: 0;
+}
+table[data-sortable] th {
+  font-weight: normal;
+  color: $default-header-color;
+  vertical-align: bottom;
+}
+table[data-sortable] th, table[data-sortable] td {
+  text-align: left;
+}
+table[data-sortable] th:not([data-sortable="false"]) {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  cursor: pointer;
+}
+table[data-sortable] th:after {
+  content: url("../images/arrow.png");
+  visibility: hidden;
+  display: inline-block;
+  vertical-align: inherit;
+  margin-right: 1px;
+  margin-left: 10px;
+}
+table[data-sortable] th[data-sorted="true"]:after {
+  visibility: visible;
+}
+table[data-sortable] th[data-sorted="true"] {
+  font-weight: bold;
+  color: $sorted-table-header-color;
+}
+table[data-sortable] th[data-sorted-direction="descending"]:after {
+  border-top-color: inherit;
+  -moz-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+}
+table[data-sortable] th[data-sorted-direction="ascending"]:after {
+  border-bottom-color: inherit;
+}
+table[data-sortable] tr {
+  font-weight: normal;
+  color: $default-table-color;
+  font-size: $table-font-size;
+}
