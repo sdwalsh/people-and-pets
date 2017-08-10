@@ -1,0 +1,8 @@
+// Main application scss file import here
+@import "neat/neat";
+
+// Default grid
+$neat-grid: (
+  columns: 12,
+  gutter: 20px,
+);
