@@ -4,6 +4,7 @@ source 'https://rubygems.org' do
   gem 'haml'
   gem 'sass'
   gem 'logger'
+  gem 'rake'
 
   group :test do
     gem 'rspec'
