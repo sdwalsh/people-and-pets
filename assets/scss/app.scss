@@ -7,6 +7,13 @@ $neat-grid: (
   gutter: 20px,
 );
 
+$border-color: #e6e7e8;
+$default-header-color: #a7a9ac;
+$default-table-color: #363945;
+$sorted-table-header-color: #54bbff;
+$table-font-size: 15px;
+$table-spacing: 16.5px;
+
 @mixin td-image($image) {
   vertical-align: middle;
   content: url($image);
