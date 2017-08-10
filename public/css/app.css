@@ -26,13 +26,15 @@ body {
   body table {
     width: calc(100% - 40px);
     float: left;
-    margin-left: 20px; }
+    margin-left: 20px;
+    table-layout: fixed; }
     body table th {
       text-align: center;
       padding-top: 16px;
       padding-bottom: 16px;
       border-bottom: solid 1px #e6e7e8; }
     body table td {
+      width: calc(100%/6);
       max-height: 30px;
       padding-top: 16px;
       padding-bottom: 16px;

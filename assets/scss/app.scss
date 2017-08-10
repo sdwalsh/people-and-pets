@@ -46,6 +46,7 @@ body {
   }
   table {
     @include grid-column(12);
+    table-layout: fixed;
     th {
       text-align: center;
       padding-top: 16px;
@@ -53,6 +54,7 @@ body {
       border-bottom: solid 1px $border-color;
     }
     td {
+      width: calc(100%/6);
       max-height: 30px;
       padding-top: 16px;
       padding-bottom: 16px;
