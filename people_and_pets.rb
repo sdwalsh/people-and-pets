@@ -1,5 +1,8 @@
 require 'sinatra'
+require 'puma'
 require 'haml'
+require 'csv'
+require 'json'
 
 class PeopleAndPets < Sinatra::Base
   get '/' do
