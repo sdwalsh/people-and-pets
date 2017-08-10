@@ -4,6 +4,7 @@ feature 'Visitor visits homepage' do
   scenario "vists homepage" do
     visit '/'
     expect(page).to have_content('People')
+    expect(page).to have_css 'table'
   end
 
   scenario "uploads comma file" do
