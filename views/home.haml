@@ -1,6 +1,7 @@
 %html
   %head
     %link{:rel => :stylesheet, :type => :"text/css", :href => "/css/app.css"}
+    %title p&p People and Pets
   %body
     .count
       %span(id="people-count") 0 
@@ -22,7 +23,7 @@
             Middle Initial
           %th
             Pet
-          %th
+          %th(data-sortable-type="date")
             Birthday
           %th
             Favorite color

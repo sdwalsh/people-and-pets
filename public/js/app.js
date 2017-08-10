@@ -34,6 +34,7 @@ $(':button').on('click', function() {
         trHTML += '</tr>';     
       });      
       $('#people').append(trHTML);
+      Sortable.init()
       // Subtract one to remove the header from the count of rows
       var rowCount = $('#people tr').length - 1;
       $("#people-count").html(rowCount);
