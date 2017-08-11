@@ -15,16 +15,16 @@ class PeopleAndPets < Sinatra::Base
       file = params[:csv][:tempfile]
       delimiter = sniffer(file)
       if !delimiter
-        return status 400
+        halt 400
       end
       # array of hashes eventually can be converted to json
       response = normalize(file, delimiter)
       if !response
-        return status 400
-      end      
-      response.to_json
+        halt 400
+      end
+      [200, response.to_json]
     else
-      return status 400
+      status 400
     end
   end
 
@@ -62,7 +62,7 @@ class PeopleAndPets < Sinatra::Base
       else
         return nil
     end
-    return response
+    response
   end
 
   # Sniffer returns the delimiter in use
@@ -75,6 +75,6 @@ class PeopleAndPets < Sinatra::Base
         return c
       end
     end
-    return nil
+    nil
   end
 end
