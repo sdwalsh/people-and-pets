@@ -38,9 +38,14 @@ body {
       float: right;
       label {
         padding-right: 15px;
+        color: $default-header-color;
+        font-size: $table-font-size;
       }
       input.text {
-        width: 430px;
+        width: 320px;
+      }
+      input.button {
+        width: 110px;
       }
     }
   }

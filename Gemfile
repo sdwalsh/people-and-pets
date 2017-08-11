@@ -2,13 +2,15 @@ source 'https://rubygems.org' do
   gem 'sinatra'
   gem 'puma'
   gem 'haml'
-  gem 'sass'
   gem 'logger'
   gem 'rake'
 
   group :test do
     gem 'rspec'
     gem 'capybara'
-    gem 'cucumber'
+  end
+
+  group :development do
+    gem "capistrano", "~> 3.9"
   end
 end

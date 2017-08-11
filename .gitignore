@@ -1,3 +1,4 @@
 .bundle/*
 sinatra.log
 .sass-cache
+node_modules

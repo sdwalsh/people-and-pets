@@ -11,18 +11,22 @@ body {
     font-size: 25px;
     color: #363945; }
   body form {
-    left: calc(16.6666666667% - 23.3333333333px + 20px);
+    left: calc(16.66667% - 23.33333px + 20px);
     position: relative;
-    width: calc(58.3333333333% - 31.6666666667px);
+    width: calc(58.33333% - 31.66667px);
     float: left;
     margin-left: 20px; }
     body form fieldset {
       border: none;
       float: right; }
       body form fieldset label {
-        padding-right: 15px; }
+        padding-right: 15px;
+        color: #a7a9ac;
+        font-size: 15px; }
       body form fieldset input.text {
-        width: 430px; }
+        width: 320px; }
+      body form fieldset input.button {
+        width: 110px; }
   body table {
     width: calc(100% - 40px);
     float: left;
@@ -114,7 +118,7 @@ table[data-sortable] th:not([data-sortable="false"]) {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   cursor: pointer; }
 
@@ -147,5 +151,3 @@ table[data-sortable] tr {
   font-weight: normal;
   color: #363945;
   font-size: 15px; }
-
-/*# sourceMappingURL=app.css.map */
