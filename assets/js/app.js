@@ -22,6 +22,41 @@
     }
   }
 
+  function constructRows(values) {
+    let trHTML = '';
+    for(let value of values) {
+      trHTML += '<tr>';
+      trHTML += buildTdElem('last', value.last, false);
+      trHTML += buildTdElem('first', value.first, false);
+      if(value.m === 'None') {
+        trHTML += buildTdElem('none', value.m, false);
+      } else {
+        trHTML += buildTdElem('m', value.m, false);
+      }      
+      trHTML += buildTdElem(value.pet.toLowerCase(), value.pet, true);
+      trHTML += buildTdElem('birthday', value.birthday, false);
+      trHTML += buildTdElem('color', value.color, false);
+      trHTML += '</tr>';
+    }
+    return trHTML;
+  }
+
+  async function sendFileRequest(req) {
+    return fetch(req)
+    .then((res) => {
+      if(res.ok) {
+        let contentType = res.headers.get('Content-Type');
+        if(contentType && contentType.includes('application/json')) {
+          return res.json();
+        } else {
+          return Promise.reject('Unexpected Content-Type');
+        }
+      } else {
+        return Promise.reject('Response not 200 - 299');
+      }
+    });
+  }
+
   fileSelect.addEventListener('click', (e) => {
     if (fileSelect) {
       fileInput.click();
@@ -34,9 +69,9 @@
     }
   });
 
-  fileInput.addEventListener('change', (e) => {
+  fileInput.addEventListener('change', async (e) => {
     e.preventDefault();
-    data = new FormData()
+    let data = new FormData()
     data.append("csv", fileInput.files[0]);
     const req = new Request('/upload', {
       method: 'POST',
@@ -47,39 +82,20 @@
     fileSelect.innerHTML = fileInput.files[0].name;
     fileInput.value = '';
 
-    fetch(req)
+    table.setAttribute('data-sortable-initialized', false);
+    resetSortStatus(tableHeaderElements);
+
+    sendFileRequest(req)
     .then((res) => {
-      if(res.ok) {
-        contentType = res.headers.get('Content-Type');
-        if(contentType && contentType.includes('application/json')) {
-          return res.json();
-        }
-      }
-    })
-    .then((data) => {
-      table.setAttribute('data-sortable-initialized', false);
-      resetSortStatus(tableHeaderElements);
-      let trHTML = '';
-      data.forEach((value) => {
-        trHTML += '<tr>';
-        trHTML += buildTdElem('last', value.last, false);
-        trHTML += buildTdElem('first', value.first, false);
-        if(value.m === 'None') {
-          trHTML += buildTdElem('none', value.m, false);
-        } else {
-          trHTML += buildTdElem('m', value.m, false);
-        }      
-        trHTML += buildTdElem(value.pet.toLowerCase(), value.pet, true);
-        trHTML += buildTdElem('birthday', value.birthday, false);
-        trHTML += buildTdElem('color', value.color, false);
-        trHTML += '</tr>';
-      });
+      let trHTML = constructRows(res)
       tableBody.insertAdjacentHTML('beforeend', trHTML);
       Sortable.init();
 
       const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
       peopleCount.innerHTML = rows;
     })
-    .catch((err) => { console.log(err); });
-  }, false);
+    .catch((e) => {
+      console.log(e);
+    });
+  });
 })();
