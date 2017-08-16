@@ -4,9 +4,9 @@
   const browse = document.getElementById('browse');
   const table = document.getElementById('people');
   const tableBody = document.getElementById('people-body');
-  const tableHeaderElements = document.getElementsByTagName('th')
+  const tableHeaderElements = document.getElementsByTagName('th');
   const peopleCount = document.getElementById('peopleCount');
-
+  
   function resetSortStatus(elements) {
     for(let i = 0; i < elements.length; i++) {
       elements[i].removeAttribute('data-sorted');

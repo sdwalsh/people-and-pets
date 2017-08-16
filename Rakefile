@@ -2,6 +2,8 @@
 # http://alphahydrae.com/2012/08/testing-with-capybara-selenium-and-rspec/
 
 require 'rubygems'
+require 'rake'
+require 'rspec/core/rake_task'
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
@@ -11,8 +13,6 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
-require 'rake'
-require 'rspec/core/rake_task'
 desc "Run specs"
 RSpec::Core::RakeTask.new do |t|
   #t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.

@@ -6,8 +6,11 @@ source 'https://rubygems.org' do
   gem 'rake'
 
   group :test do
-    gem 'minitest'
+    gem 'rspec'
     gem 'rack-test'
+    gem 'headless'
+    gem 'capybara'
+    gem 'selenium-webdriver'
   end
 
   group :development do
