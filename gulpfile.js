@@ -21,10 +21,25 @@ gulp.task('clean', function() {
   return del(['build']);
 });
 
+gulp.task('dev-scripts', ['clean'], function() {
+  // Minify and copy all JavaScript (except vendor scripts)
+  // with sourcemaps all the way down
+  return gulp.src(['assets/js/sortable.js', 'assets/js/app.js'])
+    .pipe(sourcemaps.init())
+      .pipe(babel({
+            presets: [
+                ['env', {modules: false}]
+            ]
+      }))
+      .pipe(concat('all.min.js'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('public/js'));
+});
+
 gulp.task('scripts', ['clean'], function() {
   // Minify and copy all JavaScript (except vendor scripts)
   // with sourcemaps all the way down
-  return gulp.src(['assets/js/jquery-3.2.1.min.js', 'assets/js/moment.min.js', 'assets/js/sortable.min.js', 'assets/js/app.js'])
+  return gulp.src(['assets/js/sortable.js', 'assets/js/app.js'])
     .pipe(sourcemaps.init())
       .pipe(babel({
             presets: [
@@ -33,7 +48,6 @@ gulp.task('scripts', ['clean'], function() {
       }))
       .pipe(uglify())
       .pipe(concat('all.min.js'))
-    .pipe(sourcemaps.write())
     .pipe(gulp.dest('public/js'));
 });
 
@@ -55,10 +69,11 @@ gulp.task('sass', function() {
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-  gulp.watch(paths.scripts, ['scripts']);
+  gulp.watch(paths.scripts, ['dev-scripts']);
   gulp.watch(paths.images, ['images']);
   gulp.watch(paths.scss, ['sass']);
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['watch', 'scripts', 'images', 'sass']);
+gulp.task('default', ['watch', 'dev-scripts', 'images', 'sass']);
+gulp.task('production', ['scripts', 'images', 'sass'])

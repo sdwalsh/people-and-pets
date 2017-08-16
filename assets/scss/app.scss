@@ -1,5 +1,6 @@
 // Main application scss file import here
 @import "neat/neat";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 // Default grid
 $neat-grid: (
@@ -7,12 +8,18 @@ $neat-grid: (
   gutter: 20px,
 );
 
+// Table
 $border-color: #e6e7e8;
 $default-header-color: #a7a9ac;
 $default-table-color: #363945;
 $sorted-table-header-color: #54bbff;
 $table-font-size: 15px;
 $table-spacing: 16.5px;
+
+// Count and inputs
+$count-color: #363945;
+$button-text-color: #FFFFFF;
+$button-background-color: #54bbff;
 
 @mixin td-image($image) {
   vertical-align: middle;
@@ -21,49 +28,96 @@ $table-spacing: 16.5px;
   padding-right: 10px;
 }
 
+@mixin centerText($size) {
+  height: $size;
+  vertical-align: middle;
+  line-height: $size;
+}
+
 body {
   @include grid-container;
+  font-family: 'Open Sans', sans-serif;
   //@include grid-visual;
   padding-top: 75px;
   .count {
     @include grid-column(3);
     font-size: 25px;
-    color: #363945;
+    color: $count-color;
   }
-  form {
+  .file-submit {
     @include grid-shift(2);
-    @include grid-column(7);    
-    fieldset {
+    @include grid-column(7);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    #fileInput {
+      display: none;
+    }
+    #import {
+      @include centerText(40px);
+      flex: 2;
+      margin-left: auto;
+      flex-basis: 120px;
+      flex-grow: 0;
+      color: $default-header-color;
+    }
+    #fileSelect {
+      @include centerText(38px);
+      flex: 1;
+      flex-basis: 309px;
+      flex-grow: 0;
+      padding-right: 0;
+      padding-left: 10px;
+      cursor: pointer;
+      color: $default-header-color;
+      font-size: 13px;
+      vertical-align: middle;
+      border: 1px solid $border-color;
+      border-right: none;
+      border-radius: 4px 0px 0px 4px;
+    }
+    #browse {
+      @include centerText(38px);
+      flex-basis: 89px;
+      flex-grow: 0;
+      padding-left: 0;
+      padding-left: 20px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #FFFFFF;
+      border: 1px solid $sorted-table-header-color;
+      background-color: $sorted-table-header-color;
+      border-left: none;
+      border-radius: 0px 4px 4px 0px;
+    }
+    button {
+      padding-left: 0;
       border: none;
-      float: right;
-      label {
-        padding-right: 15px;
-        color: $default-header-color;
-        font-size: $table-font-size;
-      }
-      input.text {
-        width: 320px;
-      }
-      input.button {
-        width: 110px;
-      }
+      width: 110px;
     }
   }
   table {
     @include grid-column(12);
     table-layout: fixed;
+    margin-top: 55px;
+    tr {
+      max-height: 50px;
+      overflow: hidden;
+    }
     th {
       text-align: center;
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding-top: 15px;
+      padding-bottom: 14px;
       border-bottom: solid 1px $border-color;
     }
     td {
       width: calc(100%/6);
       max-height: 30px;
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding-top: 15px;
+      padding-bottom: 14px;
       vertical-align: middle;
+      overflow: hidden;
       border-bottom: solid 1px $border-color;
     }
     .i {

@@ -1,4 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 body {
+  font-family: 'Open Sans', sans-serif;
   padding-top: 75px; }
   body::after {
     clear: both;
@@ -10,39 +12,83 @@ body {
     margin-left: 20px;
     font-size: 25px;
     color: #363945; }
-  body form {
+  body .file-submit {
     left: calc(16.66667% - 23.33333px + 20px);
     position: relative;
     width: calc(58.33333% - 31.66667px);
     float: left;
-    margin-left: 20px; }
-    body form fieldset {
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row; }
+    body .file-submit #fileInput {
+      display: none; }
+    body .file-submit #import {
+      height: 40px;
+      vertical-align: middle;
+      line-height: 40px;
+      flex: 2;
+      margin-left: auto;
+      flex-basis: 120px;
+      flex-grow: 0;
+      color: #a7a9ac; }
+    body .file-submit #fileSelect {
+      height: 38px;
+      vertical-align: middle;
+      line-height: 38px;
+      flex: 1;
+      flex-basis: 309px;
+      flex-grow: 0;
+      padding-right: 0;
+      padding-left: 10px;
+      cursor: pointer;
+      color: #a7a9ac;
+      font-size: 13px;
+      vertical-align: middle;
+      border: 1px solid #e6e7e8;
+      border-right: none;
+      border-radius: 4px 0px 0px 4px; }
+    body .file-submit #browse {
+      height: 38px;
+      vertical-align: middle;
+      line-height: 38px;
+      flex-basis: 89px;
+      flex-grow: 0;
+      padding-left: 0;
+      padding-left: 20px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #FFFFFF;
+      border: 1px solid #54bbff;
+      background-color: #54bbff;
+      border-left: none;
+      border-radius: 0px 4px 4px 0px; }
+    body .file-submit button {
+      padding-left: 0;
       border: none;
-      float: right; }
-      body form fieldset label {
-        padding-right: 15px;
-        color: #a7a9ac;
-        font-size: 15px; }
-      body form fieldset input.text {
-        width: 320px; }
-      body form fieldset input.button {
-        width: 110px; }
+      width: 110px; }
   body table {
     width: calc(100% - 40px);
     float: left;
     margin-left: 20px;
-    table-layout: fixed; }
+    table-layout: fixed;
+    margin-top: 55px; }
+    body table tr {
+      max-height: 50px;
+      overflow: hidden; }
     body table th {
       text-align: center;
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding-top: 15px;
+      padding-bottom: 14px;
       border-bottom: solid 1px #e6e7e8; }
     body table td {
       width: calc(100%/6);
       max-height: 30px;
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding-top: 15px;
+      padding-bottom: 14px;
       vertical-align: middle;
+      overflow: hidden;
       border-bottom: solid 1px #e6e7e8; }
     body table .i {
       vertical-align: middle;

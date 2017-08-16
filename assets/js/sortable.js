@@ -226,13 +226,14 @@ THE SOFTWARE.
       defaultSortDirection: 'ascending',
       reverse: true,
       match: function(a) {
-        m = moment(a, ["MM-DD-YYYY", "M-DD-YYYY", "MM-D-YYYY", "M-D-YYYY"]);
-        return matchMedia.isValid()
+        // never match unless explicitly told to run a date through attribute settings
+        return false;
       },
-      compare: function(a, b) {
-        f = moment(a, ["MM-DD-YYYY", "M-DD-YYYY", "MM-D-YYYY", "M-D-YYYY"]);
-        s = moment(b, ["MM-DD-YYYY", "M-DD-YYYY", "MM-D-YYYY", "M-D-YYYY"]);
-        return moment(f).isBefore(s);
+      comparator: function(a) {
+        var aArray = a.split('/');
+        // ISO = YYYY MM DD - remember that months are 0 based
+        var dateA = new Date(aArray[2], aArray[0] - 1, aArray[1]);
+        return dateA || 0;
       }
     }, {
       name: 'alpha',

@@ -22,6 +22,7 @@ class PeopleAndPets < Sinatra::Base
       if !response
         halt 400
       end
+      content_type 'application/json'
       [200, response.to_json]
     else
       status 400

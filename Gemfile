@@ -6,8 +6,8 @@ source 'https://rubygems.org' do
   gem 'rake'
 
   group :test do
-    gem 'rspec'
-    gem 'capybara'
+    gem 'minitest'
+    gem 'rack-test'
   end
 
   group :development do

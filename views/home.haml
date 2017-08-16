@@ -4,14 +4,13 @@
     %title p&p People and Pets
   %body
     .count
-      %span(id="people-count") 0 
+      %span{:id => "peopleCount"} 0 
       %span People
-    %form{ :class => "upload-form", :action => "/upload", :enctype => "multipart/form-data", :method => "post"}
-      %fieldset
-        %label{:for => "file"} Import a file
-        %input{:type => "file", :name => "csv", :placeholder => "my-file.csv", :class => "text"}
-        %input{:type => "button", :value => "Browse", :id => "browse", :class => "button"}
-
+    .file-submit
+      %input{:id => "fileInput", :type => "file", :name => "csv", :placeholder => "my-file.csv", :class => "text"}
+      %label{:id => "import"} Import a file
+      %div{:href => "#", :id => "fileSelect"} my-file.csv
+      %div{:href => "#", :id => "browse"} Browse
     %table(data-sortable id="people" cellspacing="0")
       %thead.header
         %tr
@@ -27,5 +26,5 @@
             Birthday
           %th
             Favorite color
-      %tbody(class="table-body")
+      %tbody{:id => "people-body"}
   %script(src="/js/all.min.js")
