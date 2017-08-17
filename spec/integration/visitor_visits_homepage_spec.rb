@@ -1,11 +1,11 @@
-require_relative '../spec_helper'
+require 'spec_helper'
 
 describe "uploads file", :type => :feature do
   it "updates table and count", js: true do
     visit '/'
     find('#browse').click
-
-    path = File.join(File.dirname(__FILE__), "../test_files/comma.txt")
+    
+    path = File.absolute_path("spec/test_files/comma.txt")
     find('#fileInput', visible: false).set(path)
 
     expect(page).to have_selector('td')
@@ -16,17 +16,17 @@ describe "uploads file", :type => :feature do
     visit '/'
     # File 1
     find('#browse').click
-    path = File.join(File.dirname(__FILE__), "../test_files/comma.txt")
+    path = File.absolute_path("spec/test_files/comma.txt")
     find('#fileInput', visible: false).set(path)
 
     # File 2
     find('#browse').click
-    path = File.join(File.dirname(__FILE__), "../test_files/pipe.txt")
+    path = File.absolute_path("spec/test_files/pipe.txt")
     find('#fileInput', visible: false).set(path)
 
     # File 3
     find('#browse').click
-    path = File.join(File.dirname(__FILE__), "../test_files/space.txt")
+    path = File.absolute_path("spec/test_files/space.txt")
     find('#fileInput', visible: false).set(path)
 
     expect(page).to have_selector('td')
@@ -38,7 +38,7 @@ describe "uploads file", :type => :feature do
     visit '/'
     find('#browse').click
 
-    path = File.join(File.dirname(__FILE__), "../test_files/both.png")
+    path = File.absolute_path('spec/test_files/both.png')
     find('#fileInput', visible: false).set(path)
 
     expect(page).not_to have_selector('td')
@@ -48,17 +48,17 @@ describe "uploads file", :type => :feature do
     visit '/'
     # File 1
     find('#browse').click
-    path = File.join(File.dirname(__FILE__), "../test_files/comma.txt")
+    path = File.absolute_path("spec/test_files/comma.txt")
     find('#fileInput', visible: false).set(path)
 
     # File 2
     find('#browse').click
-    path = File.join(File.dirname(__FILE__), "../test_files/pipe.txt")
+    path = File.absolute_path("spec/test_files/pipe.txt")
     find('#fileInput', visible: false).set(path)
 
     # File 3
     find('#browse').click
-    path = File.join(File.dirname(__FILE__), "../test_files/space.txt")
+    path = File.absolute_path("spec/test_files/space.txt")
     find('#fileInput', visible: false).set(path)
 
     expect(page).to have_selector('td')
