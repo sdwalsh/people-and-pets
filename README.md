@@ -71,13 +71,13 @@ gulp.task('production', ['scripts', 'images', 'sass'])
 I was a bit divided on how to test the application. Most of my Ruby testing experience was tied to Rails (which provides a lot of test helpers and easy to add solutions for testing). With this in mind, I stuck to RSpec and Capybara since I was more familiar with the DSL.
 
 ## Running People and Pets
-I originally planned on including deployment scripts using [Capistrano](http://capistranorb.com/) but ultimately scrapped plans as time became crunched.
 | Task            | Command                         |
 |-----------------|---------------------------------|
 | Compile assets  | `gulp` or `gulp production`     |
 | Run tests       | `xvfb-run -a bundle exec rspec` |
 | Run application | `rackup`                        |
 
+### Testing results
 ```bash
 .........
 Finished in 5.56 seconds (files took 0.46512 seconds to load)
@@ -120,6 +120,8 @@ There are a few ways of dealing with the file input design.
 
 I ultimately decided to hide the file input with `display: none` and trigger file input with javascript. When the file input is changed a POST request is sent to `/upload`.
 
+A possible alternative in the future is to use web components.
+
 ```javascript
 browse.addEventListener('click', (e) => {
     if (fileInput) {
@@ -157,8 +159,6 @@ fileInput.addEventListener('change', async (e) => {
 });
 ```
 
-A possible alternative is to use web components. They're still new and as a developing feature isn't fully supported.
-
 ### Table
 
 In the specification, table cells are 50px high. The best solution is to place the text inside table cells within a div and setting the div's height to 50px and setting overflow to hidden. Unfortunately, the javascript which sorts columns broke when div's were placed inside the cells.
@@ -173,13 +173,15 @@ Start with a asset pipeline.
 
 Don't introduce dependencies unless you absolutely must. It's hard to refactor.
 
-If you want to use CI start with it! It's sometimes hard to debug.
+If you want to use CI, start with it!
 
 Test more! Would have been worth writing unit tests for the javascript.
 
-It took a lot longer than I expected to write this readme!
+It took a lot longer than I expected to write this readme!!
 
-#### END. Coffee and cereal.
+##### Thanks for taking the time to review my solution!
+
+#### - end -
 ```
   ;)( ;
  :----:     o8Oo./
