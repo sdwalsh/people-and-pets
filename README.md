@@ -92,6 +92,53 @@ Since the application requires javascript it's necessary to change the default d
 
 ### Continuous Integration
 
+### File input
+
+There are a few ways of dealing with the file input design. 
+
+I ultimately decided to hide the file input with `display: none` and trigger file input with javascript. When the file input is changed a POST request is sent to `/upload`.
+
+The box next to the browse button is updated with the last uploaded file:
+`fileSelect.innerHTML = fileInput.files[0].name;`
+
+```javascript
+browse.addEventListener('click', (e) => {
+    if (fileInput) {
+      fileInput.click();
+    }
+});
+
+fileInput.addEventListener('change', async (e) => {
+    e.preventDefault();
+    let data = new FormData()
+    data.append("csv", fileInput.files[0]);
+    const req = new Request('/upload', {
+        method: 'POST',
+        body: data
+    });
+
+    // insert the name of the file last sent into the fileSelect element
+    fileSelect.innerHTML = fileInput.files[0].name;
+    fileInput.value = '';
+
+    table.setAttribute('data-sortable-initialized', false);
+    resetSortStatus(tableHeaderElements);
+
+    sendFileRequest(req)
+    .then((res) => {
+        let trHTML = constructRows(res)
+        tableBody.insertAdjacentHTML('beforeend', trHTML);
+        Sortable.init();
+        const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr").length;
+        peopleCount.innerHTML = rows;
+    })
+    .catch((e) => {
+        console.log(e);
+    });
+});
+```
+A possible alternative is to use web components. They're still new and as a developing feature isn't fully supported.
+
 ### Table
 
 In the specification, table cells are 50px high. The best solution is to place the text inside table cells within a div and setting the div's height to 50px and setting overflow to hidden. Unfortunately, the javascript which sorts columns broke when div's were placed inside the cells.

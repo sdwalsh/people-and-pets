@@ -9,6 +9,7 @@ source 'https://rubygems.org' do
   group :test do
     gem 'rspec'
     gem 'rspec_junit_formatter'
+    gem 'rspec-retry'
     gem 'rack-test'
     gem 'capybara'
     gem 'selenium-webdriver'
