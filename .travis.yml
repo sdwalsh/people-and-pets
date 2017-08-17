@@ -4,9 +4,6 @@ language: ruby
 addons:
   firefox: "latest"
 
-before_install:
-  - gem install bundler
-
 rvm:
   - 2.4.1
 
