@@ -19,4 +19,4 @@ before_script:
   - sleep 3 # give xvfb some time to start
   
 script:
-  - xvfb-run -a bundle exec rake travis
+  - bundle exec rake travis

@@ -1,9 +1,9 @@
-# People and Pets | p&p
+# p&p People and Pets
 ## Wistia Full Stack Developer Challenge
 
 People and Pets is my solution for the technical assessment. 
 
-I primarily worked on the afternoon of 8/10, the night of 8/15, and the morning of 8/16.
+I primarily worked on the afternoon of 8/10, the night of 8/15, the morning of 8/16, and the morning of 8/17.
 
 ## Language and Stack
 ### Rundown of the tech stack used
@@ -15,9 +15,19 @@ I primarily worked on the afternoon of 8/10, the night of 8/15, and the morning 
 | Styling             | SCSS                            | Variables, mixins, and more      |
 | Grid                | Neat                            | Simple scss grid framework       |
 | Frontend Javascript | ES6+                            | Promises!                        |
-| Frontend Libraries  | Modified Sortable.js by Hubspot | Very small framework             |
+| Frontend Libraries  | Modified Sortable.js by Hubspot | Very small framework for sorting |
 | Asset Pipeline      | Gulp                            | Compile and minify SCSS and ES6+ |
 | Testing             | RSpec and Capybara              |                                  |
+
+### File structure
+
+| Location             | What?            |
+|----------------------|------------------|
+| `/assets`            | original assets  |
+| `/public`            | compiled assets  |
+| `/spec`              | tests            |
+| `/views`             | haml view files  |
+| `people_and_pets.rb` | main application |
 
 #### Should run on 
 * `Chrome 49+` 
@@ -58,15 +68,21 @@ gulp.task('production', ['scripts', 'images', 'sass'])
 ```
 
 #### Testing
-I was a bit divided on how to test the application. Most of my Ruby testing experience was tied to Rails (which provides a lot of test helpers and easy to add solutions for testing). With this in mind, I stuck to RSpec and Capybara since I was more familiar with the DSL. I ran into some interesting problems with the javascript runtime for Capybara which I'll detail in a later section.
+I was a bit divided on how to test the application. Most of my Ruby testing experience was tied to Rails (which provides a lot of test helpers and easy to add solutions for testing). With this in mind, I stuck to RSpec and Capybara since I was more familiar with the DSL.
 
 ## Running People and Pets
 I originally planned on including deployment scripts using [Capistrano](http://capistranorb.com/) but ultimately scrapped plans as time became crunched.
-| Task            | Command                        |
-|-----------------|--------------------------------|
-| Compile assets  | `gulp` or `gulp production`    |
-| Run tests       | `xvfb-run -a bundle exec rake` |
-| Run application | `rackup`                       |
+| Task            | Command                         |
+|-----------------|---------------------------------|
+| Compile assets  | `gulp` or `gulp production`     |
+| Run tests       | `xvfb-run -a bundle exec rspec` |
+| Run application | `rackup`                        |
+
+```bash
+.........
+Finished in 5.56 seconds (files took 0.46512 seconds to load)
+9 examples, 0 failures
+```
 
 # Thoughts & Post Mortem
 ## Points of Interest
@@ -92,19 +108,22 @@ Since the application requires javascript it's necessary to change the default d
 
 ### Continuous Integration
 
+I enabled Travis CI on the repository. All tests pass locally, but when run on Travis, integration tests are failing. Possibly because of this [bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1390486). 
+
+An easy solution would be to change the javascript driver for Capybara. TravisCI includes [support for PhantomJS out of the box](https://docs.travis-ci.com/user/gui-and-headless-browsers/).
+
+I will spend more time debugging this over the weekend of 8/19 - 8/20.
+
 ### File input
 
 There are a few ways of dealing with the file input design. 
 
 I ultimately decided to hide the file input with `display: none` and trigger file input with javascript. When the file input is changed a POST request is sent to `/upload`.
 
-The box next to the browse button is updated with the last uploaded file:
-`fileSelect.innerHTML = fileInput.files[0].name;`
-
 ```javascript
 browse.addEventListener('click', (e) => {
     if (fileInput) {
-      fileInput.click();
+        fileInput.click();
     }
 });
 
@@ -117,7 +136,7 @@ fileInput.addEventListener('change', async (e) => {
         body: data
     });
 
-    // insert the name of the file last sent into the fileSelect element
+    // The box next to the browse button is updated with the last uploaded file:
     fileSelect.innerHTML = fileInput.files[0].name;
     fileInput.value = '';
 
@@ -137,6 +156,7 @@ fileInput.addEventListener('change', async (e) => {
     });
 });
 ```
+
 A possible alternative is to use web components. They're still new and as a developing feature isn't fully supported.
 
 ### Table
@@ -145,12 +165,17 @@ In the specification, table cells are 50px high. The best solution is to place t
 
 Because of time constraints, I've set the height of the cells based on the size of the font used. It's brittle and definitely not ideal.
 
-### Random thoughts
+## Assorted thoughts
+
 Sometimes picking a smaller framework increases the work and time required to create a running product. Sinatra comes with almost nothing - so small that Sinatra doesn't even call itself a framework. If time was critical, Rails would have been a better solution (convention over configuration - includes everything *and* the kitchen sink). It's quicker to prototype and build when you don't have to write out configurations.
 
 Start with a asset pipeline.
 
 Don't introduce dependencies unless you absolutely must. It's hard to refactor.
+
+If you want to use CI start with it! It's sometimes hard to debug.
+
+Test more! Would have been worth writing unit tests for the javascript.
 
 It took a lot longer than I expected to write this readme!
 
