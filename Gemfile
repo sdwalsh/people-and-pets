@@ -7,13 +7,9 @@ source 'https://rubygems.org' do
 
   group :test do
     gem 'rspec'
+    gem 'rspec_junit_formatter'
     gem 'rack-test'
-    gem 'headless'
     gem 'capybara'
     gem 'selenium-webdriver'
-  end
-
-  group :development do
-    gem "capistrano", "~> 3.9"
   end
 end
