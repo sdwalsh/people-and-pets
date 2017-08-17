@@ -19,7 +19,7 @@ I primarily worked on the afternoon of 8/10, the night of 8/15, and the morning 
 | Asset Pipeline      | Gulp                            | Compile and minify SCSS and ES6+ |
 | Testing             | RSpec and Capybara              |                                  |
 
-#### p&p should run on 
+#### Should run on 
 * `Chrome 49+` 
 * `Edge 14+` 
 * `Firefox 52+` 
@@ -28,7 +28,7 @@ I primarily worked on the afternoon of 8/10, the night of 8/15, and the morning 
 **Important:** People and Pets has only been tested on `Arch Linux` using `Chromium 60` and `Firefox Nightly 57`
 
 ### In depth reasoning
-A theme throughout my tech stack is minimalism and simplicity. I consistently chose lightweight solutions when possible while avoiding solutions that might add or expose unnecessary complexity and refactored files to reduce dependencies.
+A theme throughout the tech stack is minimalism and simplicity. I consistently chose lightweight solutions when possible while avoiding solutions that might add or expose unnecessary complexity and refactored files to reduce dependencies.
 
 #### Language
 Out of the options provided - Ruby, Python, and Elixir - I only had significant experience with Ruby. Although I was tempted to use Elixir (since I've used OCaml in the past and enjoy functional languages) I ultimately decided to stick with what I knew best - Ruby.
@@ -73,8 +73,7 @@ I originally planned on including deployment scripts using [Capistrano](http://c
 ### Javascript
 I originally decided to avoid a javascript compilation pipeline and wrote the application's primary javascript file in `ES5` using `jQuery` for DOM manipulation. When I finished I had a clean small app.js file, but had heavy dependencies (`jQuery`, `Moment.js`).
 
-I ended up refactoring app.js. 
-
+##### Refactoring
 * `jQuery` was easily factored out by using handy ES6+ features. I
 * `Moment.js` was only used to quickly parse dates (`Date.parse()` is implementation dependent if not using the ISO format). Easy replacement. Since Moment was only used during a comparison *and* since the server responds with a consistent date format MM/DD/YYYY it was easy to split the date and create a new Date for comparisons. Code below.
 ```javascript
@@ -89,8 +88,18 @@ comparator: function(a) {
 
 ### RSpec and Capybara
 
+Since the application requires javascript it's necessary to change the default driver for Capybara. I've selected Selenium for the driver.
+
+### Continuous Integration
+
+### Table
+
+In the specification, table cells are 50px high. The best solution is to place the text inside table cells within a div and setting the div's height to 50px and setting overflow to hidden. Unfortunately, the javascript which sorts columns broke when div's were placed inside the cells.
+
+Because of time constraints, I've set the height of the cells based on the size of the font used. It's brittle and definitely not ideal.
+
 ### Random thoughts
-Sometimes picking a smaller framework increases the work and time required to create a running product. Sinatra comes with almost nothing - so small that Sinatra doesn't even call itself a framework. If time was critical, Rails would have been a better solution (convention over configuration - includes everything *and* the kitchen sink). It's quicker to prototype and build when you don't have to figure out configurations.
+Sometimes picking a smaller framework increases the work and time required to create a running product. Sinatra comes with almost nothing - so small that Sinatra doesn't even call itself a framework. If time was critical, Rails would have been a better solution (convention over configuration - includes everything *and* the kitchen sink). It's quicker to prototype and build when you don't have to write out configurations.
 
 Start with a asset pipeline.
 
