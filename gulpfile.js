@@ -43,7 +43,7 @@ gulp.task('scripts', ['clean'], function() {
     .pipe(sourcemaps.init())
       .pipe(babel({
             presets: [
-                ['env', {modules: false}]
+                ['es2015', 'stage-0']
             ]
       }))
       .pipe(uglify())
