@@ -1,5 +1,5 @@
+ruby "2.4.1"
 source 'https://rubygems.org' do
-  ruby "2.4.1"
   gem 'sinatra'
   gem 'puma'
   gem 'haml'
