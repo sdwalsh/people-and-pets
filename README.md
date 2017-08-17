@@ -1,4 +1,4 @@
-# p&p People and Pets
+# People and Pets
 ## Wistia Full Stack Developer Challenge
 
 People and Pets is my solution for the technical assessment. 
@@ -36,6 +36,7 @@ I primarily worked on the afternoon of 8/10, the night of 8/15, the morning of 8
 * `Safari 10.1+` 
 
 **Important:** People and Pets has only been tested on `Arch Linux` using `Chromium 60` and `Firefox Nightly 57`
+**Layout:** Layout works to specifications at >=1100px
 
 ### In depth reasoning
 A theme throughout the tech stack is minimalism and simplicity. I consistently chose lightweight solutions when possible while avoiding solutions that might add or expose unnecessary complexity and refactored files to reduce dependencies.
@@ -179,7 +180,11 @@ Test more! Would have been worth writing unit tests for the javascript.
 
 It took a lot longer than I expected to write this readme!!
 
-##### Thanks for taking the time to review my solution!
+#### Thanks for taking the time to review my solution!
+
+#### Contact
+* Sean Walsh 
+* sean@mirango.io
 
 #### - end -
 ```
